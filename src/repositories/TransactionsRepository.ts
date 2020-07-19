@@ -52,8 +52,8 @@ class TransactionsRepository extends Repository<Transaction> {
 
   public async getTransactions(): Promise<CreateTransactionDTO[]> {
     const transactionsRepository = getCustomRepository(TransactionsRepository);
-    const transactions = transactionsRepository.find({
-      select: ['id', 'title', 'value', 'type', 'created_at', 'updated_at'],
+    const transactions: Transaction[] = await transactionsRepository.find({
+      select: ['id', 'title', 'type', 'value', 'created_at', 'updated_at'],
       relations: ['category'],
     });
     return transactions;
